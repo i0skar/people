@@ -47,7 +47,7 @@ const useStyles = makeStyles(() =>
   })
 );
 
-function People() {
+const People = () => {
   const [people, setPeople] = useState([] as any);
   const [heights, setHeights] = useState([] as any);
 
@@ -68,28 +68,26 @@ function People() {
     people.forEach((x: any, i: number) => {
       actorsAndHeights.push({ name: x, height: heights[i] });
     });
-
     if (sorting === "ascending") {
-      actorsAndHeights.sort(function (a, b) {
+      actorsAndHeights.sort((a, b) => {
         return a.height - b.height;
       });
-      let arr: string[] = [];
-      actorsAndHeights.forEach((el: any) => {
-        arr.push(el.height);
-      });
-      setHeights([...arr]);
     }
 
     if (sorting === "descending") {
-      actorsAndHeights.sort(function (a, b) {
+      actorsAndHeights.sort((a, b) => {
         return b.height - a.height;
       });
-      let arr: string[] = [];
-      actorsAndHeights.forEach((el: any) => {
-        arr.push(el.height);
-      });
-      setHeights([...arr]);
     }
+
+    let arrHeights: string[] = [];
+    let arrPeople: string[] = [];
+    actorsAndHeights.forEach((el: any) => {
+      arrHeights.push(el.height);
+      arrPeople.push(el.name);
+    });
+    setHeights([...arrHeights]);
+    setPeople([...arrPeople]);
   };
 
   return (
@@ -129,6 +127,6 @@ function People() {
       </div>
     </section>
   );
-}
+};
 
 export default People;
